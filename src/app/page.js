@@ -1,36 +1,35 @@
 import React from "react";
-import Link from "next/link";
-import { FaUser, FaUtensils } from "react-icons/fa";
 
-const Home = () => {
+const Home = async () => {
+  const response = await fetch("https://dummyjson.com/products");
+  const data = await response.json();
+  const products = data.products;
+
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-50 to-blue-100">
-      <div className="text-center bg-white shadow-lg rounded-xl p-10 max-w-lg text-white">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
-          Xush kelibsiz! 👋
-        </h1>
-        <p className="text-gray-600 mb-6">
-          Quyidagi bo‘limlardan birini tanlang va o‘rganishni boshlang.
-        </p>
-
-        <div className="flex flex-col gap-4">
-          <Link href="/user">
-            <button className="flex items-center justify-center gap-2 w-full bg-blue-500 text-white px-5 py-3 rounded-lg hover:bg-blue-600 transition">
-              <FaUser className="text-lg" />
-              User bo‘limiga o‘tish
-            </button>
-          </Link>
-
-          <Link href="/recipe">
-            <button className="flex items-center justify-center gap-2 w-full bg-green-500 text-white px-5 py-3 rounded-lg hover:bg-green-600 transition">
-              <FaUtensils className="text-lg" />
-              Recipe bo‘limiga o‘tish
-            </button>
-          </Link>
-        </div>
+    <div className="p-10 min-h-screen mt-20 bg-gray-50">
+      <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8">
+        {products?.map((product) => (
+          <div key={product.id} className="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition transform hover:scale-105 flex flex-col justify-between">
+            <div>
+              <img
+                src={product.thumbnail}
+                alt={product.title}
+                className="w-full h-52 object-contain rounded-lg mb-4"
+              />
+              <h2 className="text-2xl font-semibold text-gray-900">{product.title}</h2>
+              <p className="text-gray-600 mt-2 line-clamp-2">{product.description}</p>
+            </div>
+            <div className="flex justify-between items-center mt-0.5">
+              <span className="text-xl font-bold text-red-500">${product.price}</span>
+              <div className="text-white">
+                <button className="px-5 py-2 bg-red-600 rounded-lg hover:bg-red-700 transition font-medium shadow-md">Buy Now</button>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
 };
 
-export default React.memo(Home);
+export default Home;

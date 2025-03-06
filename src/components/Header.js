@@ -6,7 +6,7 @@ const Header = () => {
     <header className="bg-white shadow-md py-4 fixed top-0 left-0 w-full z-50">
       <div className="container mx-auto max-w-[1380px] flex justify-between items-center px-4 md:px-8">
         <Link href="/" className="text-2xl font-bold flex items-center">
-          NextJS
+          Products
         </Link>
 
         <nav>
