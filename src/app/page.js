@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 const Home = async () => {
@@ -7,13 +8,15 @@ const Home = async () => {
 
   return (
     <div className="p-10 min-h-screen mt-20 bg-gray-50">
-      <div className="container mx-auto max-w-[1380px] grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8">
+      <div className="container mx-auto max-w-[1380px] grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8">
         {products?.map((product) => (
           <div key={product.id} className="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition transform hover:scale-105 flex flex-col justify-between">
             <div>
-              <img
+              <Image
                 src={product.thumbnail}
                 alt={product.title}
+                width={350}
+                height={220}
                 className="w-full h-52 object-contain rounded-lg mb-4"
               />
               <h2 className="text-2xl font-semibold text-gray-900">{product.title}</h2>
